@@ -3,6 +3,7 @@
 namespace App\clients;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Config;
 
 class Weather
 {
@@ -24,7 +25,7 @@ class Weather
      */
     public function search(string $search)
     {
-        $response = $this->client->request('GET', 'http://api.weatherapi.com/v1/current.json?key=30981cb1a611432e95092152221409&q=' . $search, [
+        $response = $this->client->request('GET', Config::get('weather.url') . $search, [
             'auth' => ['user', 'pass'],
             'http_errors' => false
         ]);
